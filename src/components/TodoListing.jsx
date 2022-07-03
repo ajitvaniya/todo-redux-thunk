@@ -14,6 +14,7 @@ const TodoListing = () => {
 
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => { 
     dispatch(startTodoFetch());
@@ -104,10 +105,34 @@ const TodoListing = () => {
       }, 
   ];
 
-  const onSearch=()=>{
-
+  const onSearch=(e)=>{ 
+    setSearchTerm(e);
+    localStorage.setItem('searchTerm',e);
   }
-  
+
+  /*-----SEARCH IN LIST OBJCET */
+  const resetFilter = ()=>{
+    setSearchTerm('');
+    localStorage.removeItem('searchTerm');
+  }
+
+  let listData = counter?.list?.data ? counter?.list?.data:[];
+  let searchString = searchTerm || localStorage.getItem('searchTerm');
+  if(searchString){
+    searchString = searchString.toLowerCase();
+    let newResultArr = listData && listData.length && listData.reduce((acc,item)=>{
+        
+        let objTitle = item.title.toLowerCase();
+        if(objTitle.includes(searchString)){
+          acc.push(item)
+        }
+        return acc;
+    },[]);
+    listData = newResultArr;
+  }
+  /*-----SEARCH IN LIST OBJCET */
+
+
   return (
     <>
     {counter?.error ? 
@@ -122,10 +147,13 @@ const TodoListing = () => {
       >
         <Col span={2}>
          </Col>
-        <Col span={20}>
-              <Search className="searchBar"  placeholder="Search on Table Data" onSearch={onSearch} />
+        <Col span={18}>
+              <Search className="searchBar"
+              defaultValue={searchString || ''}
+              placeholder="Search on Table Data" onSearch={onSearch} />
         </Col>
-        <Col span={2}>
+        <Col span={4}>
+        <Button onClick={resetFilter}>Reset</Button> 
          </Col>
       </Row> 
 
@@ -150,7 +178,11 @@ const TodoListing = () => {
         </Col>
       </Row>
       
-      <Table columns={columns} dataSource={counter?.list?.data} onChange={handleChange} />
+      <Row gutter={24}>
+        <Col span={24}> 
+          <Table columns={columns} dataSource={listData} onChange={handleChange} /> 
+        </Col>
+      </Row>
       </Spin> }
      
     </>
