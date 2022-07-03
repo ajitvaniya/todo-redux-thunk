@@ -1,10 +1,11 @@
 import React,{useEffect} from 'react';
-import { Button, Space, Table,Spin } from 'antd';
+import { Button, Space, Table,Spin, Input, Col,Row } from 'antd';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchTodos } from '../redux/actions';
+import { fetchTodos,startTodoFetch } from '../redux/actions';
 
- 
+const { Search } = Input;
+
  
 const TodoListing = () => {
   const dispatch = useDispatch();
@@ -14,8 +15,12 @@ const TodoListing = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
 
-  useEffect(() => {
+  useEffect(() => { 
+    dispatch(startTodoFetch());
+
+    setTimeout(() => { 
          dispatch(fetchTodos());
+    },1000);
    }, [dispatch]); 
 
 
@@ -99,22 +104,52 @@ const TodoListing = () => {
       }, 
   ];
 
- 
+  const onSearch=()=>{
+
+  }
+  
   return (
     <>
     {counter?.error ? 
       <h1>{counter?.error}</h1>
     :  
     <Spin tip='Please wait loading...' spinning={counter?.loading}>
-      <Space
-        style={{
-          marginBottom: 16,
+        
+      <Row gutter={24}
+       style={{
+          marginTop: 16,
         }}
       >
-        <Button onClick={setAgeSort}>Sort age</Button>
-        <Button onClick={clearFilters}>Clear filters</Button>
-        <Button onClick={clearAll}>Clear filters and sorters</Button>
-      </Space>
+        <Col span={2}>
+         </Col>
+        <Col span={20}>
+              <Search className="searchBar"  placeholder="Search on Table Data" onSearch={onSearch} />
+        </Col>
+        <Col span={2}>
+         </Col>
+      </Row> 
+
+
+
+      <Row gutter={24}>
+        <Col span={2}>
+        </Col>
+        <Col span={20}>
+          <Space
+            style={{
+              marginBottom: 16,
+              marginTop: 16,
+            }}
+          >
+            <Button onClick={setAgeSort}>Sort age</Button>
+            <Button onClick={clearFilters}>Clear filters</Button>
+            <Button onClick={clearAll}>Clear filters and sorters</Button>
+          </Space>
+         </Col>
+         <Col span={2}>
+        </Col>
+      </Row>
+      
       <Table columns={columns} dataSource={counter?.list?.data} onChange={handleChange} />
       </Spin> }
      

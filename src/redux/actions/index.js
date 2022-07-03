@@ -25,9 +25,7 @@ export const failedTodoFetch =()=>{
 
 export const fetchTodos =()=>{
     return function (dispatch){
-        dispatch(startTodoFetch())
-        axios.get('https://jsonplaceholder.typicode.com/todos').then((res)=>{
- 
+         axios.get('https://jsonplaceholder.typicode.com/todos').then((res)=>{
              return  dispatch(completeTodoFetch(res));
         }).catch((err)=>{
             return dispatch(failedTodoFetch())
