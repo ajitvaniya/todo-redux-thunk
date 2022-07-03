@@ -17,6 +17,8 @@ Store:
 - To execute redux from terminal - go to file path in terminal and run ```node core```
 
 Added Feature:
-- Loading apis using redux thunk.
+- Loading apis using redux thunk middleware.
 - Error handling.
-- Added loader during api call.
+- Added loader during api call. 
+- SetTimeout added in middleware.
+- Search In Data  
