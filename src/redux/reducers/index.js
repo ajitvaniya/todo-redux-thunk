@@ -1,3 +1,13 @@
+import { 
+    TODO_FETCH_BEGIN,TODO_FETCH_FAILDED,TODO_FETCH_COMPETED,
+ } from '../actions/index';
+
+
+let initialState ={
+    loading:false,
+    list:[],
+    error:''
+}
 const reducer = (state=initialState,action)=>{
     switch(action.type){
        case TODO_FETCH_BEGIN:
