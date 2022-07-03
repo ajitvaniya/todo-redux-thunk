@@ -9,7 +9,7 @@ In this application, we will create a simple todo listing. We're going to use  R
 ## Details
 
 Setup:
-- run ```npm i && npm start``` for both start the development server.
+- run ```npm i && npm start``` on server.
 
 Store:
 - Created core redux store which will helps you understand redux lifecycle.
