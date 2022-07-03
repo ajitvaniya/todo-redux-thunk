@@ -16,10 +16,10 @@ export const completeTodoFetch = (todoData=[])=>{
             payload: todoData
         }
  }
-export const failedTodoFetch =(errMsg)=>{
+export const failedTodoFetch =()=>{
     return {
         type:TODO_FETCH_FAILDED,
-        payload:errMsg
+        payload:'Something went wrong! Please try later.'
     }
 }
 
@@ -30,7 +30,7 @@ export const fetchTodos =()=>{
  
              return  dispatch(completeTodoFetch(res));
         }).catch((err)=>{
-            return dispatch(failedTodoFetch(err.statusText))
+            return dispatch(failedTodoFetch())
         })
     }
 }

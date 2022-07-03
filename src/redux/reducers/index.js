@@ -25,7 +25,7 @@ const reducer = (state=initialState,action)=>{
            return { 
                loading:false,
                list:[],
-               error:''
+               error:action.payload
            }
        default:
            return state

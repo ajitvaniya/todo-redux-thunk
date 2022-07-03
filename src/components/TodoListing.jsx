@@ -18,10 +18,8 @@ const TodoListing = () => {
          dispatch(fetchTodos());
    }, [dispatch]); 
 
-  //console.log(counter);
 
   const handleChange = (pagination, filters, sorter) => {
-    //console.log('Various parameters', pagination, filters, sorter);
     setFilteredInfo(filters);
     setSortedInfo(sorter);
   };
@@ -100,9 +98,14 @@ const TodoListing = () => {
         ellipsis: true,
       }, 
   ];
+
+ 
   return (
     <>
-      <Spin tip='Please wait loading...' spinning={counter?.loading}>
+    {counter?.error ? 
+      <h1>{counter?.error}</h1>
+    :  
+    <Spin tip='Please wait loading...' spinning={counter?.loading}>
       <Space
         style={{
           marginBottom: 16,
@@ -113,7 +116,8 @@ const TodoListing = () => {
         <Button onClick={clearAll}>Clear filters and sorters</Button>
       </Space>
       <Table columns={columns} dataSource={counter?.list?.data} onChange={handleChange} />
-      </Spin>
+      </Spin> }
+     
     </>
   );
 };
