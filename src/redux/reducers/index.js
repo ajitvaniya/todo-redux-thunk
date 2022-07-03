@@ -9,7 +9,7 @@ let initialState ={
     error:''
 }
 const reducer = (state=initialState,action)=>{
-    switch(action.type){
+     switch(action.type){
        case TODO_FETCH_BEGIN:
            return {
                ...state,

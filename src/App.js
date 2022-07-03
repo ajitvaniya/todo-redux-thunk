@@ -1,15 +1,13 @@
 import React from 'react';
-import './App.css';
-import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
-
+  
 import TodoListing from './components/TodoListing';
+import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+import './App.css';
+const App = () => (
+  <div>
+   
+    <TodoListing />
+  </div>
+)
 
-const App = ()=> {  
-  return (
-    <div className="App">
-       <TodoListing />
-    </div>
-  );
-}
-
-export default App;
+export default App

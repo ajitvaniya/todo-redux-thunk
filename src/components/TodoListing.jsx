@@ -1,28 +1,27 @@
-import { Button, Space, Table } from 'antd';
+import React,{useEffect} from 'react';
+import { Button, Space, Table,Spin } from 'antd';
 import { useState } from 'react';
-const data = [
- 
-    {
-      "userId": 1,
-      "id": 1,
-      "title": "delectus aut autem",
-      "completed": false
-    },
-     
-    {
-        "userId": 2,
-        "id": 1,
-        "title": "sasf ",
-        "completed": true
-      },
-];
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchTodos } from '../redux/actions';
 
+ 
+ 
 const TodoListing = () => {
+  const dispatch = useDispatch();
+  const counter = useSelector((state) => state)
+
+
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
 
+  useEffect(() => {
+         dispatch(fetchTodos());
+   }, [dispatch]); 
+
+  //console.log(counter);
+
   const handleChange = (pagination, filters, sorter) => {
-    console.log('Various parameters', pagination, filters, sorter);
+    //console.log('Various parameters', pagination, filters, sorter);
     setFilteredInfo(filters);
     setSortedInfo(sorter);
   };
@@ -39,7 +38,7 @@ const TodoListing = () => {
   const setAgeSort = () => {
     setSortedInfo({
       order: 'descend',
-      columnKey: 'age',
+      columnKey: 'id',
     });
   };
 
@@ -103,6 +102,7 @@ const TodoListing = () => {
   ];
   return (
     <>
+      <Spin tip='Please wait loading...' spinning={counter?.loading}>
       <Space
         style={{
           marginBottom: 16,
@@ -112,7 +112,8 @@ const TodoListing = () => {
         <Button onClick={clearFilters}>Clear filters</Button>
         <Button onClick={clearAll}>Clear filters and sorters</Button>
       </Space>
-      <Table columns={columns} dataSource={data} onChange={handleChange} />
+      <Table columns={columns} dataSource={counter?.list?.data} onChange={handleChange} />
+      </Spin>
     </>
   );
 };

@@ -11,11 +11,11 @@ export  const startTodoFetch = ()=>{
     }
 }
 export const completeTodoFetch = (todoData=[])=>{
-    return {
-        type:TODO_FETCH_COMPETED,
-        payload: todoData
-    }
-}
+         return {
+            type:TODO_FETCH_COMPETED,
+            payload: todoData
+        }
+ }
 export const failedTodoFetch =(errMsg)=>{
     return {
         type:TODO_FETCH_FAILDED,
@@ -27,7 +27,8 @@ export const fetchTodos =()=>{
     return function (dispatch){
         dispatch(startTodoFetch())
         axios.get('https://jsonplaceholder.typicode.com/todos').then((res)=>{
-             return dispatch(completeTodoFetch(res.data))
+ 
+             return  dispatch(completeTodoFetch(res));
         }).catch((err)=>{
             return dispatch(failedTodoFetch(err.statusText))
         })
