@@ -15,4 +15,5 @@ Added Feature:
 ## Details
 
 Setup:
+- Switch Branch to dev.
 - run ```npm i && npm start``` on server.
