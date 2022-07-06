@@ -1,19 +1,24 @@
-# LOCAL STORAGE AUTH APP 
+# Todo Application Redux + Redux Thunk 
 
 ## Introduction
  
-In this application, we will create a simple login,registration and logout with a dashboard. Dashboard contains custom data table without any package. 
+In this application, we will create a simple todo listing. We're going to use  React on the front end, with Redux and Redux-Thunk. 
 
-
-Added Feature:
-- Login
-- Registration.
-- Added neccessary loader in components. 
-- Logout.
-- Table with searching,sorting and pagination without any package.   
+ 
 
 ## Details
 
 Setup:
-- Switch Branch to dev.
 - run ```npm i && npm start``` on server.
+
+Store:
+- Created core redux store which will helps you understand redux lifecycle.
+- File path of redux store core file is - ```src->redux->core.js``
+- To execute redux from terminal - go to file path in terminal and run ```node core```
+
+Added Feature:
+- Loading apis using redux thunk middleware.
+- Error handling.
+- Added loader during api call. 
+- SetTimeout added in middleware.
+- Search In Data  
